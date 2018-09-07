@@ -1,27 +1,4 @@
 let __main = function() {
-	/////
-	let circleBody = new p2.Body({
-		mass: 5,
-		position: [1, 1],
-	})
-	let circleShape = new p2.Circle({
-		radius: 1,
-	})
-	circleBody.addShape(circleShape)
-
-	let groundBody = new p2.Body({
-		mass: 0,
-	})
-	let groundShpae = new p2.Plane()
-	groundBody.addShape(groundShpae)
-
-	let world = new p2.World({
-		gravity: [0, 100],
-	})
-	world.addBody(circleBody)
-	world.addBody(groundBody)
-	/////
-
 	let game = Game()
 
 	let paddle = Paddle()
@@ -48,13 +25,15 @@ let __main = function() {
 	game.thingsToDoPerFrame = function() {
 		actionManager.executePressActions()
 
-		ball.move()
+		if (!actionManager.keyPressed['a']) {
+			if (!actionManager.keyPressed['d']) {
+				paddle.stay()
+			}
+		}
 
-		world.step(1 / game.fps)
+		canvasManager.world.step(1 / game.fps)
 
-		canvasManager.drawRigidBody(circleBody)
-
-		// canvasManager.draw()
+		canvasManager.draw()
 	}
 }
 __main()
