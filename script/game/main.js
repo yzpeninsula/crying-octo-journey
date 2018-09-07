@@ -1,4 +1,6 @@
 let __main = function() {
+	let game = Game()
+
 	let paddle = Paddle()
 	let ball = Ball()
 
@@ -7,17 +9,25 @@ let __main = function() {
 	canvasManager.addObject(ball)
 
 	let actionManager = ActionManager()
-	actionManager.bindAction('a', function() {
+	actionManager.bindPressAction('a', function() {
 		paddle.moveLeft()
 	})
-	actionManager.bindAction('d', function() {
+	actionManager.bindPressAction('d', function() {
 		paddle.moveRight()
 	})
+	actionManager.bindTapAction('s', function() {
+		ball.fire()
+	})
+	actionManager.bindTapAction('p', function() {
+		game.pause()
+	})
 
-	setInterval(function() {
-		actionManager.executeActions()
+	game.thingsToDoPerFrame = function() {
+		actionManager.executePressActions()
+
+		ball.move()
 
 		canvasManager.draw()
-	}, (1000 / 30))
+	}
 }
 __main()
