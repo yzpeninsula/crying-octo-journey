@@ -2,7 +2,7 @@ let __main = function() {
 	/////
 	let circleBody = new p2.Body({
 		mass: 5,
-		position: [0, 10],
+		position: [1, 1],
 	})
 	let circleShape = new p2.Circle({
 		radius: 1,
@@ -16,7 +16,7 @@ let __main = function() {
 	groundBody.addShape(groundShpae)
 
 	let world = new p2.World({
-		gravity: [0, -9.82],
+		gravity: [0, 100],
 	})
 	world.addBody(circleBody)
 	world.addBody(groundBody)
@@ -51,13 +51,10 @@ let __main = function() {
 		ball.move()
 
 		world.step(1 / game.fps)
-		log(circleBody.position[0])
-		log(circleBody.position[1])
-		log(circleBody.angle)
 
-		
+		canvasManager.drawRigidBody(circleBody)
 
-		canvasManager.draw()
+		// canvasManager.draw()
 	}
 }
 __main()

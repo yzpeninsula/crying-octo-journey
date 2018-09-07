@@ -17,5 +17,18 @@ let CanvasManager = function() {
 			o.context.drawImage(object.image, object.x, object.y, object.imageWidth, object.imageHeight)
 		}
 	}
+	o.drawRigidBody = function(body) {
+		o.clear()
+		let image = imageFromPath('../image/ball.png')
+
+		let x = body.position[0]
+		let y = body.position[1]
+
+		o.context.save()
+		o.context.translate(x, y)
+		o.context.rotate(body.angle)
+		o.context.drawImage(image, 0, 0, 25, 25)
+		o.context.restore()
+	}
 	return o
 }
