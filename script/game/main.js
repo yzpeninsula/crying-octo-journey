@@ -31,8 +31,6 @@ let __main = function() {
 			}
 		}
 
-		canvasManager.world.step(1 / game.fps)
-
 		canvasManager.draw()
 	}
 }
